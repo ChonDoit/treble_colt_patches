@@ -1,0 +1,52 @@
+From 56b5fc29f9b0c586b543602b7eaced5243d84d53 Mon Sep 17 00:00:00 2001
+From: ChonDoit <thphantomblog@gmail.com>
+Date: Fri, 7 Oct 2022 17:52:31 +0000
+Subject: [PATCH] Inherit call phh_gsi.mk
+
+---
+ config/common.mk | 22 +++++++++-------------
+ 1 file changed, 9 insertions(+), 13 deletions(-)
+
+diff --git a/config/common.mk b/config/common.mk
+index 435c00a6..03b0b309 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -4,6 +4,15 @@ $(call inherit-product-if-exists, vendor/addons/config.mk)
+ 
+ PRODUCT_BRAND ?= ColtOS
+ 
++# PHH GSI
++$(call inherit-product, vendor/colt/config/phh_gsi.mk)
++
++# Include common sepolicy
++$(call inherit-product, device/colt/sepolicy/common/sepolicy.mk)
++
++# Set Bootanimation at 720P
++TARGET_BOOT_ANIMATION_RES := 720
++
+ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+ 
+ ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
+@@ -14,19 +23,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+     ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
+ endif
+ 
+-ifeq ($(TARGET_BUILD_VARIANT),eng)
+-# Disable ADB authentication
+-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
+-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.usb.config=adb
+-else
+-# Enable ADB authentication
+-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=1
+-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.usb.config=none
+-
+-# Disable extra StrictMode features on all non-engineering builds
+-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.strictmode.disable=true
+-endif
+-
+ PRODUCT_PACKAGES += \
+     NetworkStackOverlay
+ 
+-- 
+2.34.1
+

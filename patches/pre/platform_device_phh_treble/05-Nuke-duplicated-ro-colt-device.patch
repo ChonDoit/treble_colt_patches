@@ -1,0 +1,24 @@
+From 8bf924859bac3b9794b45b280e352773eb797700 Mon Sep 17 00:00:00 2001
+From: ChonDoit <thphantomblog@gmail.com>
+Date: Sun, 19 Nov 2023 10:33:55 +0000
+Subject: [PATCH] Nuke duplicated ro.colt.device
+
+---
+ config/version.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/config/version.mk b/config/version.mk
+index 22937f2b..64cb8ee6 100644
+--- a/config/version.mk
++++ b/config/version.mk
+@@ -62,7 +62,6 @@ COLT_BUILD_FINGERPRINT := ColtOS/$(COLT_MOD_VERSION)/$(TARGET_PRODUCT_SHORT)/$(C
+ COLT_VERSION := ColtOS-$(COLT_MAJOR_VERSION)-$(COLT_BUILD_VERSION)-$(COLT_BUILD_TYPE)-$(COLT_BUILD)-$(COLT_BUILD_DATE)-$(COLT_BUILD_ZIP_TYPE)
+ 
+ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+-  ro.colt.device=$(COLT_BUILD) \
+   ro.colt.version=$(COLT_VERSION) \
+   ro.colt.build.version=$(COLT_BUILD_VERSION) \
+   ro.colt.build.type=$(COLT_BUILD_TYPE) \
+-- 
+2.34.1
+
